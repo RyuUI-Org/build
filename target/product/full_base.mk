@@ -45,7 +45,7 @@ PRODUCT_VENDOR_PROPERTIES := \
 PRODUCT_LOCALES := en_US
 
 # Get some sounds
-ifeq ($(CLOVER_BUILD),)
+ifeq ($(RYU_BUILD),)
 $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
 endif
 

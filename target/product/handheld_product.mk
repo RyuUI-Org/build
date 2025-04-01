@@ -33,7 +33,7 @@ PRODUCT_PACKAGES += \
     SettingsIntelligence \
     frameworks-base-overlays
 
-ifeq ($(CLOVER_BUILD),)
+ifeq ($(RYU_BUILD),)
 PRODUCT_PACKAGES += \
     Camera2 \
     LatinIME
