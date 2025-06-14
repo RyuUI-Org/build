@@ -53,8 +53,8 @@ function build_build_var_cache()
 {
     local T=$(gettop)
     # Grep out the variable names from the script.
-    cached_vars=(`cat $T/build/envsetup.sh $T/vendor/voltage/build/envsetup.sh | tr '()' '  ' | awk '{for(i=1;i<=NF;i++) if($i~/_get_build_var_cached/) print $(i+1)}' | sort -u | tr '\n' ' '`)
-    cached_abs_vars=(`cat $T/build/envsetup.sh $T/vendor/voltage/build/envsetup.sh | tr '()' '  ' | awk '{for(i=1;i<=NF;i++) if($i~/_get_abs_build_var_cached/) print $(i+1)}' | sort -u | tr '\n' ' '`)
+    cached_vars=(`cat $T/build/envsetup.sh $T/vendor/lessaosp/build/envsetup.sh | tr '()' '  ' | awk '{for(i=1;i<=NF;i++) if($i~/_get_build_var_cached/) print $(i+1)}' | sort -u | tr '\n' ' '`)
+    cached_abs_vars=(`cat $T/build/envsetup.sh $T/vendor/lessaosp/build/envsetup.sh | tr '()' '  ' | awk '{for(i=1;i<=NF;i++) if($i~/_get_abs_build_var_cached/) print $(i+1)}' | sort -u | tr '\n' ' '`)
     # Call the build system to dump the "<val>=<value>" pairs as a shell script.
     build_dicts_script=`\builtin cd $T; build/soong/soong_ui.bash --dumpvars-mode \
                         --vars="${cached_vars[*]}" \
@@ -440,12 +440,12 @@ function print_lunch_menu()
 function _lunch_meat()
 {
 
-    if (echo -n $1 | grep -q -e "^voltage_") ; then
-        VOLTAGE_BUILD=$(echo -n $1 | sed -e 's/^voltage_//g')
+    if (echo -n $1 | grep -q -e "^lessaosp_") ; then
+        LESSAOSP_BUILD=$(echo -n $1 | sed -e 's/^lessaosp_//g')
     else
-        VOLTAGE_BUILD=
+        LESSAOSP_BUILD=
     fi
-    export VOLTAGE_BUILD
+    export LESSAOSP_BUILD
 
     local product=$1
     local release=$2
@@ -483,7 +483,7 @@ function _lunch_meat()
     set_stuff_for_environment
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
 
-    if [[ -z "${ANDROID_QUIET_BUILD}" && -z "${VOLTAGE_BUILD}" ]]; then
+    if [[ -z "${ANDROID_QUIET_BUILD}" && -z "${LESSAOSP_BUILD}" ]]; then
         local spam_for_lunch=$(gettop)/build/make/tools/envsetup/spam_for_lunch
         if [[ -x $spam_for_lunch ]]; then
             $spam_for_lunch
@@ -1130,7 +1130,7 @@ function vosupload() {
     target_device="$(get_build_var TARGET_DEVICE)"
     product_out="out/target/product/$target_device/"
     source_file="$product_out/${filename}.zip"
-    destination="${sf_username}@frs.sourceforge.net:/home/frs/project/voltage-os/$target_device/"
+    destination="${sf_username}@frs.sourceforge.net:/home/frs/project/lessaosp/$target_device/"
     rsync -e ssh "$source_file" "$destination"
 }
 
@@ -1170,4 +1170,4 @@ fi
 
 export ANDROID_BUILD_TOP=$(gettop)
 
-. $ANDROID_BUILD_TOP/vendor/voltage/build/envsetup.sh
+. $ANDROID_BUILD_TOP/vendor/lessaosp/build/envsetup.sh

@@ -214,20 +214,20 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   script.Print("Target: {}".format(target_info.fingerprint))
 
-  date = target_info.GetBuildProp("ro.voltage.build.date")
-  version = target_info.GetBuildProp("ro.voltage.version")
+  date = target_info.GetBuildProp("ro.lessaosp.build.date")
+  version = target_info.GetBuildProp("ro.lessaosp.version")
 
   if target_info.GetBuildProp("ro.product.model") is not None:
     model = target_info.GetBuildProp("ro.product.model")
     script.Print("***********************************************");
-    script.Print("           VOLTAGE-OS for %s"%(model));
+    script.Print("           LESSAOSP for %s"%(model));
     script.Print("   Version: %s"%(version));
     script.Print("   Compiled on: %s"%(date));
     script.Print("***********************************************");
   else:
     name = target_info.GetBuildProp("ro.product.name")
     script.Print("***********************************************");
-    script.Print("           VOLTAGE-OS for %s"%(name));
+    script.Print("           LESSAOSP for %s"%(name));
     script.Print("   Version: %s"%(version));
     script.Print("   Compiled on: %s"%(date));
     script.Print("***********************************************");
